@@ -6,29 +6,22 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // Считываем строчку, проверяем что не пустая. Если пустая - кидаем эксепшен
         Scanner scanner = new Scanner(System.in);
+        String str = null;
 
         System.out.print("Введите требуемое вычисление: ");
-        int a = scanner.nextInt();
-        String Operand = scanner.next();
-        int b = scanner.nextInt();
+        str = scanner.nextLine();
+        if (str.isEmpty()) throw new IllegalArgumentException("Пустая строка");
 
-        System.out.println("Принято, " + a +" "+Operand +" " + b);
+        //Понеслись считать!
 
-
-        int result = switch (Operand) {
-            case "+" -> a + b;
-            case "-" -> a - b;
-            case "*" -> a * b;
-            case "/" -> {
-                if (b == 0) throw new ArithmeticException("Деление на ноль");
-                yield a / b;
-            }
-            default -> throw new IllegalArgumentException("Неизвестный оператор: " + Operand);
-        };
-
-
-        System.out.println("Результат: "+result);
+        try {
+            String result = Calculator.calc(str);
+            System.out.println("Результат: " + result);
+        } catch (Exception e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
 
         scanner.close();
     }
