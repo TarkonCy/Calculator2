@@ -1,5 +1,11 @@
 import java.util.Scanner;
 
+/*
+    Строка формата "1  +    2" считается допустимой. Пробелы игнорируются
+    Cтрока формата "1+2" без пробелов не поддерживается, считается некорректной
+    Пустая строка считается некорректной
+ */
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -8,20 +14,14 @@ public class Main {
 
         // Считываем строчку, проверяем что не пустая. Если пустая - кидаем эксепшен
         Scanner scanner = new Scanner(System.in);
-        String str = null;
 
         System.out.print("Введите требуемое вычисление: ");
-        str = scanner.nextLine();
+        String str = scanner.nextLine();
         if (str.isEmpty()) throw new IllegalArgumentException("Пустая строка");
 
         //Понеслись считать!
-
-        try {
-            String result = Calculator.calc(str);
-            System.out.println("Результат: " + result);
-        } catch (Exception e) {
-            System.out.println("Ошибка: " + e.getMessage());
-        }
+        String result = Calculator.calc(str);
+        System.out.println("Результат: " + result);
 
         scanner.close();
     }
